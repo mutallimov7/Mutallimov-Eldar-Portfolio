@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eldar Mutallimov — Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#050b18;--bg2:#0a1628;--bg3:#0f1e35;
+  --accent:#00d4ff;--accent2:#00ff88;--accent3:#7c3aed;
+  --text:#e8f4fd;--text2:#8ba5c7;--text3:#4a6888;
+  --glass:rgba(255,255,255,0.04);--glass-border:rgba(255,255,255,0.08);
+  --glow:0 0 40px rgba(0,212,255,0.15);
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;line-height:1.6;overflow-x:hidden}
+
+.orb{position:fixed;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
+.orb1{width:600px;height:600px;background:radial-gradient(circle,rgba(0,212,255,0.12),transparent 70%);top:-200px;right:-200px}
+.orb2{width:500px;height:500px;background:radial-gradient(circle,rgba(124,58,237,0.1),transparent 70%);bottom:10%;left:-150px}
+.orb3{width:400px;height:400px;background:radial-gradient(circle,rgba(0,255,136,0.08),transparent 70%);top:50%;right:10%}
+
+nav{position:fixed;top:0;width:100%;z-index:100;padding:1.2rem 0;background:rgba(5,11,24,0.85);backdrop-filter:blur(20px);border-bottom:1px solid var(--glass-border)}
+.nav-inner{max-width:1100px;margin:0 auto;padding:0 2rem;display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-family:'JetBrains Mono',monospace;font-size:1rem;color:var(--accent);letter-spacing:0.05em}
+.nav-logo span{color:var(--text2)}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{color:var(--text2);text-decoration:none;font-size:0.875rem;font-weight:500;transition:color 0.2s}
+.nav-links a:hover{color:var(--accent)}
+
+main{position:relative;z-index:1}
+section{max-width:1100px;margin:0 auto;padding:6rem 2rem}
+
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:8rem}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-tag{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.2);border-radius:100px;padding:0.4rem 1rem;font-size:0.8rem;color:var(--accent);margin-bottom:1.5rem;font-family:'JetBrains Mono',monospace}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--accent2);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+h1{font-size:clamp(2.5rem,5vw,4rem);font-weight:700;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1rem}
+h1 .accent-text{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-sub{font-size:1.1rem;color:var(--text2);max-width:480px;margin-bottom:2rem;line-height:1.7}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-primary{display:inline-flex;align-items:center;gap:0.5rem;background:var(--accent);color:#050b18;padding:0.75rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:600;font-size:0.9rem;transition:all 0.2s}
+.btn-primary:hover{background:#00b8d9;transform:translateY(-1px)}
+.btn-outline{display:inline-flex;align-items:center;gap:0.5rem;border:1px solid var(--glass-border);color:var(--text);padding:0.75rem 1.75rem;border-radius:8px;text-decoration:none;font-weight:500;font-size:0.9rem;transition:all 0.2s;background:var(--glass)}
+.btn-outline:hover{border-color:var(--accent);color:var(--accent)}
+
+.hero-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:20px;padding:2rem;backdrop-filter:blur(10px)}
+.stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.stat{background:rgba(255,255,255,0.03);border-radius:12px;padding:1rem;text-align:center;border:1px solid rgba(255,255,255,0.05)}
+.stat-num{font-size:1.8rem;font-weight:700;font-family:'JetBrains Mono',monospace}
+.c-accent{color:var(--accent)}.c-green{color:var(--accent2)}.c-purple{color:#a78bfa}.c-orange{color:#fb923c}
+.stat-label{font-size:0.75rem;color:var(--text3);margin-top:0.25rem;text-transform:uppercase;letter-spacing:0.05em}
+.tech-row{display:flex;flex-wrap:wrap;gap:0.5rem}
+.tech-pill{background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.15);color:var(--accent);border-radius:100px;padding:0.3rem 0.75rem;font-size:0.75rem;font-family:'JetBrains Mono',monospace}
+
+.section-label{font-family:'JetBrains Mono',monospace;font-size:0.8rem;color:var(--accent);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:0.5rem}
+.section-title{font-size:clamp(1.8rem,3vw,2.5rem);font-weight:700;letter-spacing:-0.02em;margin-bottom:3rem}
+.section-title span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.project-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:1.75rem;transition:all 0.3s;position:relative;overflow:hidden}
+.project-card:hover{border-color:rgba(0,212,255,0.3);transform:translateY(-4px);box-shadow:var(--glow)}
+.project-card.featured{border-color:rgba(0,212,255,0.2);background:rgba(0,212,255,0.04)}
+.project-badge{display:inline-block;background:rgba(0,255,136,0.1);border:1px solid rgba(0,255,136,0.2);color:var(--accent2);border-radius:100px;padding:0.2rem 0.6rem;font-size:0.7rem;font-weight:600;margin-bottom:1rem;text-transform:uppercase;letter-spacing:0.05em}
+.project-title{font-size:1.1rem;font-weight:600;margin-bottom:0.5rem}
+.project-desc{font-size:0.875rem;color:var(--text2);margin-bottom:1.25rem;line-height:1.6}
+.project-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1.25rem}
+.tag{background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.08);color:var(--text2);border-radius:6px;padding:0.2rem 0.6rem;font-size:0.72rem;font-family:'JetBrains Mono',monospace}
+.project-link{display:inline-flex;align-items:center;gap:0.4rem;color:var(--accent);text-decoration:none;font-size:0.82rem;font-weight:500}
+.project-link:hover{text-decoration:underline}
+
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem}
+.skill-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:16px;padding:1.5rem}
+.skill-card-title{font-size:0.8rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--text3);margin-bottom:1rem;font-weight:600}
+.skill-items{display:flex;flex-wrap:wrap;gap:0.5rem}
+.skill-item{display:flex;align-items:center;gap:0.4rem;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.07);border-radius:8px;padding:0.4rem 0.75rem;font-size:0.82rem}
+.skill-dot{width:6px;height:6px;border-radius:50%}
+.dot-blue{background:var(--accent)}.dot-green{background:var(--accent2)}.dot-purple{background:#a78bfa}.dot-orange{background:#fb923c}
+
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--accent),transparent)}
+.timeline-item{position:relative;margin-bottom:2.5rem}
+.timeline-dot{position:absolute;left:-2.4rem;top:0.25rem;width:12px;height:12px;background:var(--accent);border-radius:50%;border:2px solid var(--bg);box-shadow:0 0 10px rgba(0,212,255,0.5)}
+.timeline-date{font-family:'JetBrains Mono',monospace;font-size:0.78rem;color:var(--accent);margin-bottom:0.4rem}
+.timeline-title{font-size:1rem;font-weight:600;margin-bottom:0.25rem}
+.timeline-sub{font-size:0.875rem;color:var(--text2);margin-bottom:0.5rem}
+.gpa-badge{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(0,255,136,0.08);border:1px solid rgba(0,255,136,0.15);color:var(--accent2);border-radius:6px;padding:0.2rem 0.6rem;font-size:0.78rem;font-family:'JetBrains Mono',monospace}
+
+.cert-item{background:var(--glass);border:1px solid var(--glass-border);border-radius:12px;padding:1.25rem;display:flex;gap:1rem;align-items:flex-start;transition:border-color 0.2s;margin-bottom:0.75rem}
+.cert-item:hover{border-color:rgba(0,212,255,0.25)}
+.cert-icon{width:36px;height:36px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.cert-title{font-size:0.875rem;font-weight:600;margin-bottom:0.2rem}
+.cert-sub{font-size:0.78rem;color:var(--text2)}
+
+.langs-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
+.lang-card{background:var(--glass);border:1px solid var(--glass-border);border-radius:12px;padding:1.25rem}
+.lang-name{font-weight:600;margin-bottom:0.3rem}
+.lang-level{font-size:0.8rem;color:var(--text2);margin-bottom:0.75rem}
+.lang-bar-bg{height:3px;background:rgba(255,255,255,0.08);border-radius:100px;overflow:hidden}
+.lang-bar{height:100%;border-radius:100px}
+
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem}
+.contact-item{display:flex;align-items:center;gap:1rem;background:var(--glass);border:1px solid var(--glass-border);border-radius:12px;padding:1.1rem 1.25rem;text-decoration:none;color:var(--text);transition:all 0.2s;margin-bottom:1rem}
+.contact-item:hover{border-color:rgba(0,212,255,0.3);color:var(--accent)}
+.contact-icon{width:38px;height:38px;border-radius:8px;background:rgba(0,212,255,0.08);border:1px solid rgba(0,212,255,0.15);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.contact-label{font-size:0.78rem;color:var(--text3);margin-bottom:0.1rem}
+.contact-val{font-size:0.875rem;font-weight:500}
+.award-item{display:flex;gap:1rem;align-items:flex-start;background:var(--glass);border:1px solid var(--glass-border);border-radius:12px;padding:1rem 1.25rem;margin-bottom:0.75rem}
+.award-text{font-size:0.875rem;color:var(--text2);line-height:1.5}
+.award-text strong{color:var(--text);display:block;margin-bottom:0.1rem}
+
+footer{text-align:center;padding:2rem;border-top:1px solid var(--glass-border);color:var(--text3);font-size:0.8rem;font-family:'JetBrains Mono',monospace}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+.fade-up{opacity:0;animation:fadeUp 0.6s ease forwards}
+.d1{animation-delay:0.1s}.d2{animation-delay:0.2s}.d3{animation-delay:0.3s}.d4{animation-delay:0.4s}
+
+@media(max-width:768px){
+  .hero-grid,.contact-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">&lt;<span>EM</span> /&gt;</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:mutellimoveldar7@gmail.com" class="btn-primary" style="padding:0.5rem 1.25rem;font-size:0.82rem">Hire Me</a>
+  </div>
+</nav>
+
+<main>
+  <section class="hero" id="about">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-tag fade-up">Available for Internship</div>
+        <h1 class="fade-up d1">
+          <span style="display:block">Eldar</span>
+          <span class="accent-text">Mutallimov</span>
+        </h1>
+        <p class="hero-sub fade-up d2">Computer Science student at UFAZ · Building intelligent systems with Python, AI/CV, and full-stack web. Based in Baku, Azerbaijan.</p>
+        <div class="hero-btns fade-up d3">
+          <a href="#projects" class="btn-primary">View Projects</a>
+          <a href="https://github.com/mutallimov7" target="_blank" class="btn-outline">GitHub Profile</a>
+          <a href="cv.pdf" download="Eldar_Mutallimov_CV.pdf" class="btn-outline">⬇ Download CV</a>
+        </div>
+      </div>
+      <div class="hero-card fade-up d4">
+        <div class="stat-grid">
+          <div class="stat"><div class="stat-num c-accent">4.0</div><div class="stat-label">GPA / 4.0</div></div>
+          <div class="stat"><div class="stat-num c-green">9+</div><div class="stat-label">Projects</div></div>
+          <div class="stat"><div class="stat-num c-purple">5</div><div class="stat-label">Languages</div></div>
+          <div class="stat"><div class="stat-num c-orange">5+</div><div class="stat-label">Competitions</div></div>
+        </div>
+        <div class="tech-row">
+          <span class="tech-pill">Python</span><span class="tech-pill">YOLOv8</span>
+          <span class="tech-pill">MySQL</span><span class="tech-pill">MongoDB</span>
+          <span class="tech-pill">C / C++</span><span class="tech-pill">Java</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="section-label">// projects</div>
+    <h2 class="section-title">What I've <span>Built</span></h2>
+    <div class="projects-grid">
+      <div class="project-card featured">
+        <div class="project-badge">⭐ Featured</div>
+        <div class="project-title">EcoCola Recycling Platform</div>
+        <div class="project-desc">Full-stack gamified recycling web app for Coca-Cola Hackathon. Users earn points, level up, and compete on leaderboards by recycling at smart RecycleBot machines across Azerbaijan.</div>
+        <div class="project-tags"><span class="tag">React</span><span class="tag">Node.js</span><span class="tag">SQLite</span><span class="tag">Leaflet.js</span><span class="tag">JWT</span><span class="tag">Express</span></div>
+        <a href="https://github.com/mutallimov7/EcoCola-Recycling-Platform" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
+      <div class="project-card featured">
+        <div class="project-badge">🤖 AI / CV</div>
+        <div class="project-title">AI Vehicle Speed Estimation</div>
+        <div class="project-desc">Computer vision system using YOLOv8n to detect vehicles in video and estimate speed via bounding-box measurements and frame differencing for traffic monitoring.</div>
+        <div class="project-tags"><span class="tag">Python</span><span class="tag">YOLOv8n</span><span class="tag">OpenCV</span><span class="tag">NumPy</span><span class="tag">Ultralytics</span></div>
+        <a href="https://github.com/mutallimov7/YOLO-Vehicle-Speed-Estimation" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
+      <div class="project-card">
+        <div class="project-badge">🗄️ Database</div>
+        <div class="project-title">To-Do List Database App</div>
+        <div class="project-desc">Task management app with 5+ features stored in both MySQL and MongoDB, comparing SQL vs NoSQL through full CRUD operations.</div>
+        <div class="project-tags"><span class="tag">MySQL</span><span class="tag">MongoDB</span><span class="tag">CRUD</span><span class="tag">Data Modeling</span></div>
+      </div>
+      <div class="project-card">
+        <div class="project-badge">🌐 Web</div>
+        <div class="project-title">GPA Calculator</div>
+        <div class="project-desc">Interactive web app to calculate semester and cumulative GPA from grades and credits, with JavaScript validation. Live on Netlify.</div>
+        <div class="project-tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Netlify</span></div>
+        <a href="https://l1-s1-gpa-calculator.netlify.app" target="_blank" class="project-link">Live Demo →</a>
+      </div>
+      <div class="project-card">
+        <div class="project-badge">🎮 Game</div>
+        <div class="project-title">Snake Game in C + OpenGL</div>
+        <div class="project-desc">Classic 2D Snake Game in C using OpenGL/GLUT with real-time game loop, collision detection, and linked-list-based snake growth.</div>
+        <div class="project-tags"><span class="tag">C</span><span class="tag">OpenGL</span><span class="tag">GLUT</span><span class="tag">Linked List</span></div>
+        <a href="https://github.com/mutallimov7/Snake-game" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
+      <div class="project-card">
+        <div class="project-badge">🏛️ Academic</div>
+        <div class="project-title">Java Labyrinth Game</div>
+        <div class="project-desc">Java-based labyrinth game using object-oriented programming principles and pathfinding logic.</div>
+        <div class="project-tags"><span class="tag">Java</span><span class="tag">OOP</span><span class="tag">Pathfinding</span></div>
+        <a href="https://github.com/mutallimov7/Java-Labyrinth-Game" target="_blank" class="project-link">View on GitHub →</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="section-label">// skills</div>
+    <h2 class="section-title">Technical <span>Stack</span></h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="skill-card-title">Programming</div>
+        <div class="skill-items">
+          <div class="skill-item"><span class="skill-dot dot-blue"></span>Python</div>
+          <div class="skill-item"><span class="skill-dot dot-blue"></span>JavaScript</div>
+          <div class="skill-item"><span class="skill-dot dot-blue"></span>Java</div>
+          <div class="skill-item"><span class="skill-dot dot-blue"></span>C</div>
+          <div class="skill-item"><span class="skill-dot dot-blue"></span>C++</div>
+          <div class="skill-item"><span class="skill-dot dot-blue"></span>HTML / CSS</div>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Databases</div>
+        <div class="skill-items">
+          <div class="skill-item"><span class="skill-dot dot-green"></span>MySQL</div>
+          <div class="skill-item"><span class="skill-dot dot-green"></span>MongoDB</div>
+          <div class="skill-item"><span class="skill-dot dot-green"></span>SQLite</div>
+          <div class="skill-item"><span class="skill-dot dot-green"></span>SQL Queries</div>
+          <div class="skill-item"><span class="skill-dot dot-green"></span>CRUD Ops</div>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Frameworks & Tools</div>
+        <div class="skill-items">
+          <div class="skill-item"><span class="skill-dot dot-purple"></span>Git / GitHub</div>
+          <div class="skill-item"><span class="skill-dot dot-purple"></span>OpenGL/GLUT</div>
+          <div class="skill-item"><span class="skill-dot dot-purple"></span>YOLOv8</div>
+        </div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-card-title">Competencies</div>
+        <div class="skill-items">
+          <div class="skill-item"><span class="skill-dot dot-orange"></span>Algorithms</div>
+          <div class="skill-item"><span class="skill-dot dot-orange"></span>Data Structures</div>
+          <div class="skill-item"><span class="skill-dot dot-orange"></span>AI / CV</div>
+          <div class="skill-item"><span class="skill-dot dot-orange"></span>Data Analysis</div>
+          <div class="skill-item"><span class="skill-dot dot-orange"></span>Problem Solving</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="section-label">// education & competitions</div>
+    <h2 class="section-title">My <span>Journey</span></h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:3rem">
+      <div>
+        <p style="font-size:0.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1.5rem">Education</p>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">2024 — 2028 (expected)</div>
+            <div class="timeline-title">B.S. Computer Science</div>
+            <div class="timeline-sub">French-Azerbaijani University (UFAZ) · Baku</div>
+            <div class="gpa-badge">GPA: 4.0 / 4.0</div>
+            <p style="margin-top:0.75rem;font-size:0.8rem;color:var(--text3)">Database Systems · OOP · Network Algorithms · Computer Architecture · Cryptography</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <div class="timeline-date">Jul 2025</div>
+            <div class="timeline-title">Data Structures & Algorithms</div>
+            <div class="timeline-sub">CodeStar</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:0.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1.5rem">Competitions & Certifications</p>
+        <div class="cert-item"><div class="cert-icon" style="background:rgba(0,212,255,0.1)">🔐</div><div><div class="cert-title">CanYouHack CTF Competition</div><div class="cert-sub">Cryptography, Reverse Engineering, OSINT, Web Security</div></div></div>
+        <div class="cert-item"><div class="cert-icon" style="background:rgba(124,58,237,0.15)">⚡</div><div><div class="cert-title">ICPC Azerbaijan 2026</div><div class="cert-sub">Algorithmic problem-solving qualification round</div></div></div>
+        <div class="cert-item"><div class="cert-icon" style="background:rgba(0,255,136,0.1)">💡</div><div><div class="cert-title">IDEALISE 2 Incubation Program</div><div class="cert-sub">Hackathon-style · team collaboration · idea presentation</div></div></div>
+        <div class="cert-item"><div class="cert-icon" style="background:rgba(251,146,60,0.1)">🧮</div><div><div class="cert-title">IYMC Math Challenge 2025</div><div class="cert-sub">Bronze Honor · Advanced to Pre-Final Round</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-label">// languages</div>
+    <h2 class="section-title">I Speak <span>5 Languages</span></h2>
+    <div class="langs-grid">
+      <div class="lang-card"><div class="lang-name">Azerbaijani</div><div class="lang-level">Native</div><div class="lang-bar-bg"><div class="lang-bar" style="width:100%;background:var(--accent)"></div></div></div>
+      <div class="lang-card"><div class="lang-name">Turkish</div><div class="lang-level">C1 — Advanced</div><div class="lang-bar-bg"><div class="lang-bar" style="width:85%;background:var(--accent2)"></div></div></div>
+      <div class="lang-card"><div class="lang-name">English</div><div class="lang-level">B2 — Upper Intermediate</div><div class="lang-bar-bg"><div class="lang-bar" style="width:70%;background:#a78bfa"></div></div></div>
+      <div class="lang-card"><div class="lang-name">Russian</div><div class="lang-level">A2 — Elementary</div><div class="lang-bar-bg"><div class="lang-bar" style="width:35%;background:#fb923c"></div></div></div>
+      <div class="lang-card"><div class="lang-name">French</div><div class="lang-level">A2 — Elementary</div><div class="lang-bar-bg"><div class="lang-bar" style="width:35%;background:#f472b6"></div></div></div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="section-label">// contact</div>
+    <h2 class="section-title">Let's <span>Connect</span></h2>
+    <div class="contact-grid">
+      <div>
+        <a href="mailto:mutellimoveldar7@gmail.com" class="contact-item"><div class="contact-icon">📧</div><div><div class="contact-label">Email</div><div class="contact-val">mutellimoveldar7@gmail.com</div></div></a>
+        <a href="https://github.com/mutallimov7" target="_blank" class="contact-item"><div class="contact-icon">🐙</div><div><div class="contact-label">GitHub</div><div class="contact-val">github.com/mutallimov7</div></div></a>
+        <a href="https://www.linkedin.com/in/eldar-mutallimov-002524324/" target="_blank" class="contact-item"><div class="contact-icon">💼</div><div><div class="contact-label">LinkedIn</div><div class="contact-val">Eldar Mutallimov</div></div></a>
+        <a href="tel:+994513845668" class="contact-item"><div class="contact-icon">📱</div><div><div class="contact-label">Phone</div><div class="contact-val">+994 51 384 56 68</div></div></a>
+      </div>
+      <div>
+        <p style="font-size:0.8rem;color:var(--text3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1rem">Awards & Honors</p>
+        <div class="award-item"><div style="font-size:1.25rem">🥉</div><div class="award-text"><strong>3rd Place — History Competition</strong>Team · Regional Round · 2023</div></div>
+        <div class="award-item"><div style="font-size:1.25rem">🥇</div><div class="award-text"><strong>1st Place — "Zafarin Fatehlari"</strong>Regional Round · May 2024</div></div>
+        <div class="award-item"><div style="font-size:1.25rem">🥉</div><div class="award-text"><strong>Bronze Honor — IYMC 2025</strong>International Youth Math Challenge · Pre-Final</div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>&lt; built with passion · Eldar Mutallimov · 2026 /&gt;</footer>
+</body>
+</html>
